@@ -1,12 +1,16 @@
+import React from 'react';
 import './App.css';
+import Movies from './component/movies';
+
 
 function App() {
     return(
-        <div>
-            <h1>hello world</h1>
-        </div>
+        <React.Fragment>
+            <main className="container mt-5">
+              <Movies />
+            </main>
+        </React.Fragment>
     )
-  
 }
 
 export default App;
