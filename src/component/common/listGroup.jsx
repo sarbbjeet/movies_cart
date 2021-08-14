@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {getGenres} from '../../services/fakeGenreService'
 
-export default function ListGroup(props) {
-
-    const [genres, setgenres] = useState(()=> getGenres())
+export default function ListGroup(props) { 
+      
+    const [genres] = useState(()=> [{name:'All Genres', _id:''}, ...getGenres()])
     
-    useEffect(()=>{
-     console.log("genres=", props.selectedGenre)   
-    } )
+    // useEffect(()=>{
+    //  console.log("genres=", genres)   
+    // } ,[])
     const {selectedGenre, handleGenreSelect} = props
     return (
     <ul className="list-group">
@@ -15,7 +15,7 @@ export default function ListGroup(props) {
         genres.map(genre=>  
            <li onClick={()=> handleGenreSelect(genre.name)} 
             key= {genre._id} 
-            class={genre.name ===selectedGenre ? "list-group-item active" 
+            className={genre.name ===selectedGenre ? "list-group-item active" 
                 : "list-group-item"  }>{genre.name}</li>)
     }
     </ul>

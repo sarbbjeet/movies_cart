@@ -21,7 +21,18 @@ deleteMovie = (movie) =>{
 handlePageChange = (pageNum)=>{
     this.setState({selectedPage: pageNum})
 }
-handleGenreSelect = (genre) => this.setState({selectedGenre:genre})
+handleGenreSelect = (genre) => {
+     //when user click on any genre button then pagination go back to 1st page 
+    this.setState({selectedGenre:genre, selectedPage:1})
+}
+
+//filter movies by using genre 
+handleGenreFilter = ()=> {
+  if(this.state.selectedGenre ==='' || this.state.selectedGenre ==='All Genres')
+   return this.state.movies 
+   return this.state.movies.filter(m=>
+          m.genre.name===this.state.selectedGenre)
+}
 
 componentDidMount(){
    this.setState({movies: getMovies()})
@@ -29,13 +40,15 @@ componentDidMount(){
     render() {
         //obect destructuring 
         const {movies, selectedPage, pageSize,selectedGenre } = this.state
-        const {length:count}= movies  //get length of movies and use as count variable
+        const filtered = this.handleGenreFilter() 
+        const {length:count}= filtered   //get length of movies and use as count variable
         const numberOfPage= Math.ceil(count/pageSize)
-        const paginateItems = paginate(movies,pageSize,selectedPage)
-        if(count===0) return( <h3>sorry no movie available</h3> )  
+        //paginate after filtering data 
+        const paginateItems = paginate(filtered,pageSize,selectedPage)
+        if(movies.length===0) return( <h3>sorry no movie available</h3> )  
         return (
             <>
-              <h3>total {count} movies are available in the below list.</h3>
+              <h3>total {movies.length} movies are available in the below list.</h3>
             <div className="row">
                 <div className="col-2">
                 <ListGroup selectedGenre={selectedGenre}
