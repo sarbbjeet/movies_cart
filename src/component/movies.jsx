@@ -61,7 +61,7 @@ componentDidMount(){
                 </table>
     <Pagination 
        numberOfPage={numberOfPage} 
-       selectedPag={selectedPage}
+       selectedPage={selectedPage}
        handlePageChange={this.handlePageChange} />
         </React.Fragment>
         )
