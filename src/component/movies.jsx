@@ -3,6 +3,7 @@ import { getMovies } from '../services/fakeMovieService'
 import paginate from '../utils/paginate'
 import ListGroup from './common/listGroup'
 import Pagination from './common/pagination'
+import MoviesTable from './moviesTable'
 
 export default class Movies extends Component {
 state={
@@ -55,31 +56,7 @@ componentDidMount(){
                     handleGenreSelect={this.handleGenreSelect}/>
                 </div>
                 <div className="col">
-                <table className="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Genre</th>  
-                            <th>Stock</th>
-                            <th>Rate</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            paginateItems.map(m=> <tr key={m._id}>    
-                            <td>{m.title}</td>
-                            <td>{m.genre.name}</td>
-                            <td>{m.numberInStock}</td>
-                            <td>{m.dailyRentalRate}</td>
-                            <td><button 
-                                className="btn btn-danger btn-sm"
-                                onClick = {()=>this.deleteMovie(m)}>
-                                    delete</button></td>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
+               <MoviesTable deleteMovie={this.deleteMovie} movies = {paginateItems} /> 
     <Pagination 
        numberOfPage={numberOfPage} 
        selectedPage={selectedPage}
