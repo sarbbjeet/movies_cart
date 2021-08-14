@@ -29,15 +29,11 @@ componentDidMount(){
         const {movies, selectedPage, pageSize} = this.state
         const {length:count}= movies  //get length of movies and use as count variable
         const numberOfPage= Math.ceil(count/pageSize)
-        
-
+        const paginateItems = paginate(movies,pageSize,selectedPage)
+        if(count===0) return( <h3>sorry no movie available</h3> )  
         return (
             <React.Fragment>
-                {
-                    count===0 ? <h3>sorry no movie available</h3>
-                    :
-                    <>
-                <h3> Total {count} movies available in the below list.</h3>
+                <h3>total {count} movies are available in the below list.</h3>
                 <table className="table table-bordered">
                     <thead>
                         <tr>
@@ -50,7 +46,7 @@ componentDidMount(){
                     </thead>
                     <tbody>
                         {
-                            movies.map(m=><tr key={m._id}>    
+                            paginateItems.map(m=> <tr key={m._id}>    
                             <td>{m.title}</td>
                             <td>{m.genre.name}</td>
                             <td>{m.numberInStock}</td>
@@ -63,11 +59,9 @@ componentDidMount(){
                         }
                     </tbody>
                 </table>
-                </>
-    }
     <Pagination 
        numberOfPage={numberOfPage} 
-       selectedPage={selectedPage}
+       selectedPag={selectedPage}
        handlePageChange={this.handlePageChange} />
         </React.Fragment>
         )
