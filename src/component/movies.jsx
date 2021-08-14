@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { getMovies } from '../services/fakeMovieService'
+import paginate from '../utils/paginate'
 import Pagination from './common/pagination'
 
 export default class Movies extends Component {
 state={
- movies: []
+ movies: [], 
+ selectedPage: 1,
+ pageSize:4
 }
 
 deleteMovie = (movie) =>{
@@ -12,13 +15,21 @@ deleteMovie = (movie) =>{
     this.setState({movies})
 } 
 
+
+handlePageChange = (pageNum)=>{
+    this.setState({selectedPage: pageNum})
+}
+
+
 componentDidMount(){
    this.setState({movies: getMovies()})
 }
     render() {
         //obect destructuring 
-        const {movies} = this.state
+        const {movies, selectedPage, pageSize} = this.state
         const {length:count}= movies  //get length of movies and use as count variable
+        const numberOfPage= Math.ceil(count/pageSize)
+        
 
         return (
             <React.Fragment>
@@ -54,8 +65,11 @@ componentDidMount(){
                 </table>
                 </>
     }
-    <Pagination />
-            </React.Fragment>
+    <Pagination 
+       numberOfPage={numberOfPage} 
+       selectedPage={selectedPage}
+       handlePageChange={this.handlePageChange} />
+        </React.Fragment>
         )
     }
 }
