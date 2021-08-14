@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { getMovies } from '../services/fakeMovieService'
 import paginate from '../utils/paginate'
+import ListGroup from './common/listGroup'
 import Pagination from './common/pagination'
 
 export default class Movies extends Component {
 state={
  movies: [], 
  selectedPage: 1,
- pageSize:4
+ pageSize:4,
+ selectedGenre:''
 }
 
 deleteMovie = (movie) =>{
@@ -15,25 +17,31 @@ deleteMovie = (movie) =>{
     this.setState({movies})
 } 
 
-
+//handle pagination page select event
 handlePageChange = (pageNum)=>{
     this.setState({selectedPage: pageNum})
 }
-
+handleGenreSelect = (genre) => this.setState({selectedGenre:genre})
 
 componentDidMount(){
    this.setState({movies: getMovies()})
 }
     render() {
         //obect destructuring 
-        const {movies, selectedPage, pageSize} = this.state
+        const {movies, selectedPage, pageSize,selectedGenre } = this.state
         const {length:count}= movies  //get length of movies and use as count variable
         const numberOfPage= Math.ceil(count/pageSize)
         const paginateItems = paginate(movies,pageSize,selectedPage)
         if(count===0) return( <h3>sorry no movie available</h3> )  
         return (
-            <React.Fragment>
-                <h3>total {count} movies are available in the below list.</h3>
+            <>
+              <h3>total {count} movies are available in the below list.</h3>
+            <div className="row">
+                <div className="col-2">
+                <ListGroup selectedGenre={selectedGenre}
+                    handleGenreSelect={this.handleGenreSelect}/>
+                </div>
+                <div className="col">
                 <table className="table table-bordered">
                     <thead>
                         <tr>
@@ -63,7 +71,9 @@ componentDidMount(){
        numberOfPage={numberOfPage} 
        selectedPage={selectedPage}
        handlePageChange={this.handlePageChange} />
-        </React.Fragment>
+        </div>
+        </div>
+        </>
         )
     }
 }
