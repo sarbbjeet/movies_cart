@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
 
 export default class MoviesTable extends Component {
+
+    raiseSort = (path)=>{
+        const {sortedColumn} = this.props 
+        if(sortedColumn.path === path)
+          sortedColumn.order= (sortedColumn.order ==='asc') ? 'desc' : 'asc'
+        else
+         sortedColumn.path = path
+      this.props.onSort(sortedColumn) //pass sortedColumn rather than path 
+     }
+    
     render() {
         const {movies,deleteMovie, onSort} = this.props
         return (
                  <table className="table table-bordered">
                     <thead>
                         <tr>
-                            <th onClick = {()=> onSort('title')}>Title</th>
-                            <th onClick = {()=> onSort('genre.name')} >Genre</th>  
-                            <th onClick = {()=> onSort('numberInStock')}>Stock</th>
-                            <th onClick = {()=> onSort('dailyRentalRate')}>Rate</th>
+                            <th onClick = {()=> this.raiseSort('title')}>Title</th>
+                            <th onClick = {()=> this.raiseSort('genre.name')} >Genre</th>  
+                            <th onClick = {()=> this.raiseSort('numberInStock')}>Stock</th>
+                            <th onClick = {()=> this.raiseSort('dailyRentalRate')}>Rate</th>
                             <th></th>
                         </tr>
                     </thead>

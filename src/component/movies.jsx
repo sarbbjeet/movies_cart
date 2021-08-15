@@ -29,14 +29,7 @@ handleGenreSelect = (genre) => {
     this.setState({selectedGenre:genre, selectedPage:1})
 }
 
-handleSort = (path)=>{
-   const {sortedColumn} = this.state 
-   if(sortedColumn.path === path)
-     sortedColumn.order= (sortedColumn.order ==='asc') ? 'desc' : 'asc'
-   else
-    sortedColumn.path = path
- this.setState({sortedColumn})
-}
+handleSort = (sortedColumn)=> this.setState({sortedColumn})
 
 //filter movies by using genre 
 handleGenreFilter = ()=> {
@@ -72,7 +65,9 @@ componentDidMount(){
                <MoviesTable 
                deleteMovie={this.deleteMovie} 
                movies = {paginateItems}
-               onSort = {this.handleSort} /> 
+               onSort = {this.handleSort}
+               sortedColumn = {sortedColumn}
+               /> 
     <Pagination 
        numberOfPage={numberOfPage} 
        selectedPage={selectedPage}
