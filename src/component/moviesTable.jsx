@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import TableHeader from './common/tableHeader'
 
 export default class MoviesTable extends Component {
-
+   
     raiseSort = (path)=>{
-        const {sortedColumn} = this.props 
+        const {sortedColumn} = this.props  
         if(sortedColumn.path === path)
           sortedColumn.order= (sortedColumn.order ==='asc') ? 'desc' : 'asc'
         else
@@ -12,10 +13,20 @@ export default class MoviesTable extends Component {
      }
     
     render() {
-        const {movies,deleteMovie, onSort} = this.props
+        const {movies,deleteMovie,sortedColumn} = this.props
+        const columns = [
+            {name:'Title', path:'title'},
+            {name:'Genre', path:'genre.name'},
+            {name:'Stock', path: 'numberInStock'},
+            {name: 'Rate', path: 'dailyRentalRate'},
+            {}
+        ]
         return (
                  <table className="table table-bordered">
-                    <thead>
+                     <TableHeader columns={columns} 
+                        sortedColumn ={sortedColumn} 
+                        onSort ={this.raiseSort} />
+                    {/* <thead>
                         <tr>
                             <th onClick = {()=> this.raiseSort('title')}>Title</th>
                             <th onClick = {()=> this.raiseSort('genre.name')} >Genre</th>  
@@ -23,7 +34,7 @@ export default class MoviesTable extends Component {
                             <th onClick = {()=> this.raiseSort('dailyRentalRate')}>Rate</th>
                             <th></th>
                         </tr>
-                    </thead>
+                    </thead> */}
                     <tbody>
                         {
                             movies.map(m=> <tr key={m._id}>    
