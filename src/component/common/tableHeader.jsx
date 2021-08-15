@@ -10,24 +10,31 @@ export default class TableHeader extends Component {
         return <i className={_class}></i>
 
     }
+    //create style object in the component  
+    styleObect = {
+        thh:{  
+        cursor:'pointer'    
+    
+        }
+    }
     //props required
     //sortedColumn  --object
     //columns --array contain [{path: 'title', name:'Title'}]
     //raiseSort -- function 
     //
+    
     render() {
         const {columns, sortedColumn, onSort} = this.props
         return (
             <thead>
-                        <tr>
-                            {
-                                columns.map((c,i)=> 
-                                    <th key={i} onClick = {()=> onSort(c.path)}>{c.name}
-                                       {this.handleSortIcon(sortedColumn,c)}
-                                         </th> )
-
-                            }
-                        </tr>
+               <tr>
+                {
+                columns.map((c,i)=> 
+                <th style={this.styleObect.thh} key={i} onClick = {()=> onSort(c.path)}>{c.name}
+                    {this.handleSortIcon(sortedColumn,c)}
+                </th> )
+                }
+                </tr>
             </thead>
         )
     }

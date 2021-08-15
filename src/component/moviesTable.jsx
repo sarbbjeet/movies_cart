@@ -1,20 +1,10 @@
 import React, { Component } from 'react'
-import TableBody from './common/tableBody'
-import TableHeader from './common/tableHeader'
+import Table from './common/table'
 
 export default class MoviesTable extends Component {
-   
-    raiseSort = (path)=>{
-        const {sortedColumn} = this.props  
-        if(sortedColumn.path === path)
-          sortedColumn.order= (sortedColumn.order ==='asc') ? 'desc' : 'asc'
-        else
-         sortedColumn.path = path
-      this.props.onSort(sortedColumn) //pass sortedColumn rather than path 
-     }
     
     render() {
-        const {movies,deleteMovie,sortedColumn} = this.props
+        const {movies,deleteMovie,sortedColumn, onSort} = this.props
         const columns = [
             {name:'Title', path:'title'},
             {name:'Genre', path:'genre.name'},
@@ -27,18 +17,12 @@ export default class MoviesTable extends Component {
             }
         ]
         return (
-                 <table className="table table-bordered">
-                     <TableHeader columns={columns} 
-                        sortedColumn ={sortedColumn} 
-                        onSort ={this.raiseSort} />
-
-                    <TableBody 
-                       columns ={columns} 
-                       deleteRow ={deleteMovie}
-                       data={movies}
-                       />
-            
-                </table>
+            <Table columns={columns} 
+                   sortedColumn={sortedColumn} 
+                   deleteItem={deleteMovie} 
+                   data={movies}
+                   onSort={onSort}
+                   />
             
         )
     }
