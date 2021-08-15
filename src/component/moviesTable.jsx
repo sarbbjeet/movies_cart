@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import TableBody from './common/tableBody'
 import TableHeader from './common/tableHeader'
 
 export default class MoviesTable extends Component {
@@ -19,36 +20,24 @@ export default class MoviesTable extends Component {
             {name:'Genre', path:'genre.name'},
             {name:'Stock', path: 'numberInStock'},
             {name: 'Rate', path: 'dailyRentalRate'},
-            {}
+            {key:'delete', content:(item)=>{
+                return <button className="btn btn-danger btn-sm"
+                               onClick={()=>deleteMovie(item)}>delete</button>
+            } 
+            }
         ]
         return (
                  <table className="table table-bordered">
                      <TableHeader columns={columns} 
                         sortedColumn ={sortedColumn} 
                         onSort ={this.raiseSort} />
-                    {/* <thead>
-                        <tr>
-                            <th onClick = {()=> this.raiseSort('title')}>Title</th>
-                            <th onClick = {()=> this.raiseSort('genre.name')} >Genre</th>  
-                            <th onClick = {()=> this.raiseSort('numberInStock')}>Stock</th>
-                            <th onClick = {()=> this.raiseSort('dailyRentalRate')}>Rate</th>
-                            <th></th>
-                        </tr>
-                    </thead> */}
-                    <tbody>
-                        {
-                            movies.map(m=> <tr key={m._id}>    
-                            <td>{m.title}</td>
-                            <td>{m.genre.name}</td>
-                            <td>{m.numberInStock}</td>
-                            <td>{m.dailyRentalRate}</td>
-                            <td><button 
-                                className="btn btn-danger btn-sm"
-                                onClick = {()=>deleteMovie(m)}>
-                                    delete</button></td>
-                            </tr>)
-                        }
-                    </tbody>
+
+                    <TableBody 
+                       columns ={columns} 
+                       deleteRow ={deleteMovie}
+                       data={movies}
+                       />
+            
                 </table>
             
         )
