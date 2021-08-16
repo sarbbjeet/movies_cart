@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import Table from './common/table'
+import {Link} from 'react-router-dom'
 
 export default class MoviesTable extends Component {
     
     render() {
         const {movies,deleteMovie,sortedColumn, onSort} = this.props
         const columns = [
-            {name:'Title', path:'title'},
+            {name:'Title', path:'title' , content:(item)=><Link to={`/movies/${item._id}`} >{item.title}</Link>},
             {name:'Genre', path:'genre.name'},
             {name:'Stock', path: 'numberInStock'},
             {name: 'Rate', path: 'dailyRentalRate'},

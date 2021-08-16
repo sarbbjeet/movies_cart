@@ -5,6 +5,7 @@ import ListGroup from './common/listGroup'
 import Pagination from './common/pagination'
 import MoviesTable from './moviesTable'
 import _ from 'lodash'
+import {Link} from 'react-router-dom'
 
 export default class Movies extends Component {
 state={
@@ -43,6 +44,13 @@ handleGenreSelect = (genre) => this.setState({selectedGenre:genre, selectedPage:
 //save sortedcolumn data to this.state sortedcolumn={path:'title', order:'asc'}
 handleSort = (sortedColumn)=> this.setState({sortedColumn})
 
+//display movies count 
+displayMoviesCount = (movies)=> {
+  if(movies.length===0) 
+    return `sorry no movie available`
+  return `Total ${movies.length} movies are available.`   
+}
+
 // life cycle hook to read movies from js file
 componentDidMount(){
    this.setState({movies: getMovies()})
@@ -58,10 +66,8 @@ componentDidMount(){
          //paginate after filtering data 
         const paginateItems = paginate(sorted,pageSize,selectedPage)
 
-        if(movies.length===0) return( <h3>sorry no movie available</h3> )  
         return (
             <>
-            <h3>total {movies.length} movies are available in the below list.</h3>
             <div className="row">
                 {/* list group to filter genre */}
               <div className="col-2">
@@ -70,6 +76,9 @@ componentDidMount(){
               </div>
               {/* movie table */}
               <div className="col">
+                <Link className="btn btn-primary mb-4" to="/addMovie">Add Movie</Link> 
+
+              <h3>{this.displayMoviesCount(movies)}</h3>
                <MoviesTable 
                  deleteMovie={this.deleteMovie} 
                  movies = {paginateItems}

@@ -10,7 +10,7 @@ export default function ListGroup(props) {
     // } ,[])
     const {selectedGenre, handleGenreSelect} = props
     return (
-    <ul className="list-group">
+    <ul style={{cursor:'pointer'}} className="list-group">
     {
         genres.map(genre=>  
            <li onClick={()=> handleGenreSelect(genre.name)} 
