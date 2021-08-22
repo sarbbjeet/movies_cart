@@ -7,10 +7,11 @@ export default class Form extends Component {
 
     renderInput(name, label, type = 'text') { //by default type is text
         return ( < Input errors = { this.state.errors }
-            handleInput = { this.onChange }
+            onChange = { this.onChange }
             name = { name }
             label = { label }
             type = { type }
+            // style1 = {{color:'red'}}
             value = { this.state.data[name] }
             />
         )
