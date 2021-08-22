@@ -1,10 +1,10 @@
 import React from 'react'
 
 export default function Input(props) {
-    const {name,value, errors, handleInput,type='text'} =  props
+    const {name,label,value, errors, handleInput,type} =  props
     return (
         <div className="mb-2">
-            <label className="form-label" htmlFor={name}>{name}</label>
+            <label className="form-label" htmlFor={name}>{label}</label>
             <input name={name}
             autoComplete="off"
              onChange={handleInput} 

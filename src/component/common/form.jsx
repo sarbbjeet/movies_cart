@@ -1,17 +1,36 @@
 import React, { Component } from 'react'
 import Joi from 'joi-browser'
+import Input from './input'
 
 //all loginform functions are decleared here to reuse in other components 
 export default class Form extends Component {
-    //validate username and password before sending to  database 
-    //validate using joi 
+
+    renderInput(name, label, type = 'text') { //by default type is text
+        return ( < Input errors = { this.state.errors }
+            handleInput = { this.onChange }
+            name = { name }
+            label = { label }
+            type = { type }
+            value = { this.state.data[name] }
+            />
+        )
+    }
+    renderButton(label) {
+            return ( <button
+                // button is disabled if wrorng username and password 
+                disabled = { this.validate() }
+                className = "btn btn-primary mt-3" >{label} 
+                </button>
+            )
+        }
+        //validate username and password before sending to  database 
+        //validate using joi 
     validate = () => {
         const errors = {}
         const data = {...this.state.data } //data means username and password
         const abortE = { abortEarly: false } //record all validate errors
         const { error } = Joi.validate(data, this.schema, abortE)
         if (!error) return null
-        console.log(error.details)
         for (let item in error.details)
             errors[error.details[item].path[0]] = item.message //item.path[0]  //key word(username or password)  
         return errors
