@@ -7,6 +7,7 @@ import NavBar from './component/navBar';
 import NotFound from './component/notFound';
 import Rentails from './component/rentails';
 import LoginForm from './component/loginForm';
+import MovieForm from './component/movieForm';
 
 function App() {
     return(
@@ -14,9 +15,9 @@ function App() {
             <NavBar />
             <main className="container mt-5">
             <Switch>
-                <Route path = "/movies" render = {({props})=><Movies {...props}></Movies>}></Route> 
-                <Route path="/movies/:id" component={Movies}></Route>
-                {/* <Route path="/movies" component={Movies}></Route> */}
+                <Route exact path = "/movies" render = {({props})=><Movies {...props}></Movies>}></Route> 
+                {/* <Route path="/movies/:id" render={({props})=><MovieForm {...props }></MovieForm>}></Route> */}
+                <Route path="/movies/:id" component={MovieForm}></Route>
                 <Route path="/login" component={LoginForm}></Route>
                 <Route path="/customers" component={Customers}></Route>
                 <Route path="/rentails" component={Rentails}></Route>

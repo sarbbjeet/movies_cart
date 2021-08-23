@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Joi from 'joi-browser'
 import Input from './input'
+import Select from '../common/select'
 
 //all loginform functions are decleared here to reuse in other components 
 export default class Form extends Component {
@@ -16,6 +17,17 @@ export default class Form extends Component {
             />
         )
     }
+
+    renderSelect(name, label, type='text'){
+        return( <Select 
+            name={name}
+            label = {label}
+            value = {this.state.data.genreId}
+            options={this.state.genres}
+            onChange = {this.onChange}
+            errors = {this.state.errors}
+            ></Select>)
+    }
     renderButton(label) {
             return ( <button
                 // button is disabled if wrorng username and password 
@@ -29,6 +41,7 @@ export default class Form extends Component {
     validate = () => {
         const errors = {}
         const data = {...this.state.data } //data means username and password
+        if(data._id=="") data._id ="abc"//set default to bypass _id validation  
         const abortE = { abortEarly: false } //record all validate errors
         const { error } = Joi.validate(data, this.schema, abortE)
         if (!error) return null
@@ -60,7 +73,6 @@ export default class Form extends Component {
         const errors = {}
         if (errorMessage) errors[input.name] = errorMessage
             // else delete errors[input.name]
-
         data[input.name] = input.value
         this.setState({ data, errors }) //set username and password to state object
     }

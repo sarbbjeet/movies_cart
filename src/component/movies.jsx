@@ -76,7 +76,7 @@ componentDidMount(){
               </div>
               {/* movie table */}
               <div className="col">
-                <Link className="btn btn-primary mb-4" to="/addMovie">Add Movie</Link> 
+                <Link className="btn btn-primary mb-4" to="/movies/new">Add Movie</Link> 
 
               <h3>{this.displayMoviesCount(movies)}</h3>
                <MoviesTable 
