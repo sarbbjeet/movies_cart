@@ -1,6 +1,6 @@
 import Joi from 'joi-browser'
 import React from 'react'
-import { getGenres } from '../services/fakeGenreService'
+import { getGenres } from '../services/httpGenres'
 import { getMovies, saveMovie } from '../services/fakeMovieService'
 import Form from './common/form'
 
@@ -25,9 +25,9 @@ export default class MovieForm extends Form {
       rate: Joi.number().required().label("Rate")
   }
 
-  componentDidMount(){
+ async componentDidMount(){
     //get genres list
-    const genres = getGenres()
+    const genres = await getGenres()
     this.setState({genres})
     const movieId = this.props.match.params.id;
     if(movieId === "new") return  //add new movie

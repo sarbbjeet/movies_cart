@@ -1,13 +1,17 @@
-import React, {useState} from 'react'
-import {getGenres} from '../../services/fakeGenreService'
+import React, {useState, useEffect} from 'react'
 
-export default function ListGroup(props) { 
-      
-    const [genres] = useState(()=> [{name:'All Genres', _id:''}, ...getGenres()])
-    
-    // useEffect(()=>{
-    //  console.log("genres=", genres)   
-    // } ,[])
+import { getGenres } from '../../services/httpGenres'
+export default function ListGroup(props) {
+ const [genres, setGenres] = useState([])  
+    useEffect(()=>{
+        asyncRequest()  // function to handle async request
+    },[])  //useeffect run only when component mount
+
+   async function asyncRequest (){
+       const res = await getGenres()
+       setGenres([{name:'All Genres', _id:''}, ...res])
+   }
+ 
     const {selectedGenre, handleGenreSelect} = props
     return (
     <ul style={{cursor:'pointer'}} className="list-group">

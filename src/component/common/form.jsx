@@ -41,7 +41,7 @@ export default class Form extends Component {
     validate = () => {
         const errors = {}
         const data = {...this.state.data } //data means username and password
-        if(data._id=="") data._id ="abc"//set default to bypass _id validation  
+        if(data._id==="") data._id ="abc"//set default to bypass _id validation  
         const abortE = { abortEarly: false } //record all validate errors
         const { error } = Joi.validate(data, this.schema, abortE)
         if (!error) return null

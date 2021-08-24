@@ -1,4 +1,3 @@
-import { kMaxLength } from 'joi-browser'
 import React from 'react'
 
 export default function Input(props) {
