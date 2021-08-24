@@ -8,12 +8,15 @@ import NotFound from './component/notFound';
 import Rentails from './component/rentails';
 import LoginForm from './component/loginForm';
 import MovieForm from './component/movieForm';
+import { ToastContainer } from 'react-toastify'; //show toast here 
 
 function App() {
     return(
         <React.Fragment>
             <NavBar />
             <main className="container mt-5">
+                {/* toast component */}
+                <ToastContainer />   
             <Switch>
                 <Route exact path = "/movies" render = {({props})=><Movies {...props}></Movies>}></Route> 
                 {/* <Route path="/movies/:id" render={({props})=><MovieForm {...props }></MovieForm>}></Route> */}

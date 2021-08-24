@@ -1,6 +1,7 @@
 import http from '../services/httpServices'
+import config from '../config.json'
 
-const moviesUrl = 'http://localhost:3002/api/movies'
+const moviesUrl = `${config.backendServerURL}/movies`;
 export async function getMovies() {
 
     return await http.get(moviesUrl) //retuen promise

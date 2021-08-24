@@ -7,7 +7,7 @@ export default class TableBody extends Component {
     //condition to check column contain button(c.content) or normal data(!c.content)
     renderCell = (m,c)=>{
     if(c.content)  //true
-      return <td key={c.key}>{c.content(m)}</td>
+      return <td key={c.key + m}>{c.content(m)}</td>
       /*nested key words (ex. genre.name) not applicable on below expression  
         <td>{m[c.path]}</td>)  
         so use lodash */     
