@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getMovies } from '../services/fakeMovieService'
+import { getMovies } from '../services/httpMovies'
 import paginate from '../utils/paginate'
 import ListGroup from './common/listGroup'
 import Pagination from './common/pagination'
@@ -61,8 +61,9 @@ displayMoviesCount = (movies)=> {
 }
 
 // life cycle hook to read movies from js file
-componentDidMount(){
-   this.setState({movies: getMovies()})
+async componentDidMount(){
+   const { data: movies} = await getMovies()
+   this.setState({movies})
 }
     render() { 
         //obect destructuring 
