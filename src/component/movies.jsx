@@ -89,14 +89,12 @@ async componentDidMount(){
         return (
             <>
             <div className="row">
-                {/* list group to filter genre */}
-              <div className="col-2">
-                <ListGroup selectedGenre={selectedGenre}
+                <ListGroup className="col-2" selectedGenre={selectedGenre}
                 handleGenreSelect={this.handleGenreSelect}/>
-              </div>
+        
               {/* movie table */}
               <div className="col">
-                <Link className="btn btn-primary mb-4" to="/movies/new">Add Movie</Link> 
+                <Link className="btn btn-primary m-4" to="/movies/new">Add Movie</Link> 
 
               <h3>{this.displayMoviesCount(movies)}</h3>
 
