@@ -1,6 +1,7 @@
-import axios from 'axios'
-const url = "http://localhost:3002/api/genres"
+import http from '../services/httpServices'
+import config from '../config.json'
+const url = config.url + '/api/genres'
 export async function getGenres() {
-    const { data: response } = await axios.get(url)
+    const { data: response } = await http.get(url)
     return response
 }
