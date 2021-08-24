@@ -8,7 +8,8 @@ axios.interceptors.response.use(null, error => {
     if (!expectedError)
         alert(error) //unexpected error such as network error or bugs 
     else
-        console.error(error) //expected error
+        alert(error)
+        //console.error(error) //expected error
 
     //alert(error) //expected error
     return Promise.reject(error)

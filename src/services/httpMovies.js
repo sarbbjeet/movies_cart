@@ -7,6 +7,7 @@ export async function getMovies() {
 
 }
 
+//modified movie object according to back-end server is required
 function mapToViewModel(movie) {
     return {
         title: movie.title,
@@ -20,5 +21,10 @@ export async function saveMovie(movie) {
     if (movie._id)
         return await http.put(moviesUrl + '/' + movie._id, mapToViewModel(movie))
     return await http.post(moviesUrl, mapToViewModel(movie))
+
+}
+
+export async function deleteMovie(movie) {
+    return await http.delete(moviesUrl + '/' + movie._id)
 
 }

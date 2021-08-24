@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getMovies } from '../services/httpMovies'
+import { deleteMovie, getMovies } from '../services/httpMovies'
 import paginate from '../utils/paginate'
 import ListGroup from './common/listGroup'
 import Pagination from './common/pagination'
@@ -17,9 +17,19 @@ state={
  sortedColumn: {path:'title', order: 'asc'}
 }
 
-deleteMovie = (movie) =>{
-    const movies = this.state.movies.filter(m => m._id !==movie._id)
-    this.setState({movies})
+deleteMovie = async(movie) =>{
+  /*to improve the response time  
+  update state before delete movie from database
+  when we delete movie from the database before the state, 
+  it takes some time to show the final result 
+  */
+ const oldMovies = this.state.movies
+ const movies = this.state.movies.filter(m => m._id !==movie._id)
+ this.setState({movies})
+ const {data: delMovie} = await deleteMovie(movie)
+ //if error to delete movie from database then set old movies to the state
+ if(!delMovie) this.setState({oldMovies})  
+
 } 
 
 //handle pagination page select event
