@@ -1,8 +1,8 @@
 import Joi from 'joi-browser'
 import React from 'react'
 import { getGenres } from '../services/httpGenres'
-import { saveMovie } from '../services/fakeMovieService'
-import { getMovies } from '../services/httpMovies'
+// import { saveMovie } from '../services/fakeMovieService'
+import { getMovies , saveMovie} from '../services/httpMovies'
 import Form from './common/form'
 
 export default class MovieForm extends Form {
@@ -48,10 +48,10 @@ export default class MovieForm extends Form {
    }
   }
 
-  doSubmit(){
+  async doSubmit(){
     //server code 
-    console.log("data=",this.state.data)
-    saveMovie(this.state.data)
+    const movie= await saveMovie(this.state.data) 
+    console.log(movie)
     this.props.history.push('/movies') 
   } 
     render() {
