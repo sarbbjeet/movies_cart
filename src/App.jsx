@@ -32,7 +32,10 @@ useEffect(() => {
                 <Route exact path = "/movies" render = {({props})=>
                 <Movies {...props} user= {auth.getCurrentUser()}></Movies>}></Route> 
                 {/* <Route path="/movies/:id" render={({props})=><MovieForm {...props }></MovieForm>}></Route> */}
-                <Route path="/movies/:id" component={MovieForm}></Route>
+                {/* <Route path="/movies/:id" component={MovieForm}></Route> */}
+                <Route path="/movies/:id" 
+                render={props => auth.getCurrentUser() ? <MovieForm {...props}></MovieForm>
+                                                       : <Redirect to="/"></Redirect>}></Route>
                 <Route path="/login" component={LoginForm}></Route>
                 <Route path="/customers" component={Customers}></Route>
                 <Route path="/rentails" component={Rentails}></Route>
