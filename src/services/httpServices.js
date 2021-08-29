@@ -14,14 +14,13 @@ axios.interceptors.response.use(null, error => {
     else
         toast.error(`unexpected error: ${error.response.data.message}`) //custom message
 
-
     //alert(error) //expected error
     return Promise.reject(error)
 })
 
 /*add token header with axios so whenever user access any 
        routes token header automatically added */
-axios.defaults.headers.common['x-auth-token1'] = auth.getJwt()
+axios.defaults.headers.common['x-auth-token'] = auth.getJwt()
 
 const http = {
     get: axios.get,
