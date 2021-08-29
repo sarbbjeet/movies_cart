@@ -8,10 +8,11 @@ axios.interceptors.response.use(null, error => {
     const expectedError = error.response && error.response.status >= 400 &&
         error.response.status <= 500
     if (!expectedError)
-        toast.error(`expected error: ${error.message}`)
+    // toast.error(`expected error: ${error.message}`)
+        toast.error(`expected error: ${error.response.data.message}`)
         //  alert(error) //unexpected error such as network error or bugs 
     else
-        toast.error(`unexpected error: ${error.message}`)
+        toast.error(`unexpected error: ${error.response.data.message}`) //custom message
 
 
     //alert(error) //expected error
@@ -20,7 +21,7 @@ axios.interceptors.response.use(null, error => {
 
 /*add token header with axios so whenever user access any 
        routes token header automatically added */
-axios.defaults.headers.common['x-auth-token'] = auth.getJwt()
+axios.defaults.headers.common['x-auth-token1'] = auth.getJwt()
 
 const http = {
     get: axios.get,

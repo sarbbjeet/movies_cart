@@ -26,9 +26,13 @@ deleteMovie = async(movie) =>{
  const oldMovies = this.state.movies
  const movies = this.state.movies.filter(m => m._id !==movie._id)
  this.setState({movies})
- const {data: delMovie} = await deleteMovie(movie)
+ try{
+ await deleteMovie(movie)
+ }
  //if error to delete movie from database then set old movies to the state
- if(!delMovie) this.setState({oldMovies})  
+ catch(ex){
+ this.setState({movies: oldMovies})
+ }  
 
 } 
 
