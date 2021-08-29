@@ -8,6 +8,8 @@ async function login(email, password) {
     return await http.post(url, { email, password })
 }
 
+http.setJwt(getJwt()) //set token to axios headers 
+
 //decode token 
 function getCurrentUser() {
     try {

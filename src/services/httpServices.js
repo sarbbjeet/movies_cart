@@ -2,7 +2,7 @@
 //handle unexpected errors from center
 import axios from "axios";
 import { toast } from "react-toastify";
-import auth from "./authService";
+// import auth from "./authService";   //bidirectional mistake 
 
 axios.interceptors.response.use(null, error => {
     const expectedError = error.response && error.response.status >= 400 &&
@@ -20,13 +20,15 @@ axios.interceptors.response.use(null, error => {
 
 /*add token header with axios so whenever user access any 
        routes token header automatically added */
-axios.defaults.headers.common['x-auth-token'] = auth.getJwt()
+function setJwt(token) {
+    axios.defaults.headers.common['x-auth-token'] = token
+}
 
 const http = {
     get: axios.get,
     post: axios.post,
     put: axios.put,
-    delete: axios.delete
-
+    delete: axios.delete,
+    setJwt
 }
 export default http

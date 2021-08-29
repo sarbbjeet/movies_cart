@@ -80,7 +80,8 @@ async componentDidMount(){
    this.setState({movies})
 }
     render() { 
-        //obect destructuring 
+        //object destructuring
+
         const {movies, selectedPage, pageSize,selectedGenre ,sortedColumn } = this.state
         const filtered = this.handleGenreFilter() //get filtered data
         const {length:count}= filtered   //get length of movies and use as count variable
@@ -98,8 +99,9 @@ async componentDidMount(){
         
               {/* movie table */}
               <div className="col">
+                { this.props.user && 
                 <Link className="btn btn-primary m-4" to="/movies/new">Add Movie</Link> 
-
+                }
               <h3>{this.displayMoviesCount(movies)}</h3>
 
               <div className="mb-3"> 

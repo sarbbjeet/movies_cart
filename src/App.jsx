@@ -29,7 +29,8 @@ useEffect(() => {
                 {/* toast component */}
                 <ToastContainer />   
             <Switch>
-                <Route exact path = "/movies" render = {({props})=><Movies {...props}></Movies>}></Route> 
+                <Route exact path = "/movies" render = {({props})=>
+                <Movies {...props} user= {auth.getCurrentUser()}></Movies>}></Route> 
                 {/* <Route path="/movies/:id" render={({props})=><MovieForm {...props }></MovieForm>}></Route> */}
                 <Route path="/movies/:id" component={MovieForm}></Route>
                 <Route path="/login" component={LoginForm}></Route>
