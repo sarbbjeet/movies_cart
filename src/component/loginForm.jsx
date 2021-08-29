@@ -1,4 +1,5 @@
 import Joi from 'joi-browser'
+import { Redirect } from 'react-router-dom'
 import auth from '../services/authService.js'
 import Form from './common/form.jsx'
 
@@ -21,11 +22,12 @@ schema = {
     doSubmit = async()=>{
         //server code
         try{
+            const {state} = this.props.location  //get previous location or pathname
             const {data,headers}= await auth.login(this.state.data.username,
                 this.state.data.password)
             auth.saveToken(headers['x-auth-token'])
+            window.location = state? state.from.pathname : "/" 
             //this.props.history.push('/')  //home page
-            
 
         } 
         catch(ex){
@@ -39,6 +41,10 @@ schema = {
     render(){
     return (
         <div>
+            {
+                // protected login route when user is already login
+            auth.getCurrentUser() && <Redirect to="/" />           
+            }
             <h3>Login Form </h3>
             <form onSubmit={this.handleSubmit}>
             {/* {this.renderInput('name', 'Name') } */}

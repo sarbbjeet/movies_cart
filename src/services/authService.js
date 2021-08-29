@@ -27,7 +27,7 @@ function getJwt() {
 
 function saveToken(token) {
     localStorage.setItem('token', token)
-    window.location = "/" //mount all components again with redirect to home page
+        // window.location = "/" //mount all components again with redirect to home page
 }
 
 function logout() {

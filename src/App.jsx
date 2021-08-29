@@ -35,7 +35,7 @@ useEffect(() => {
                 {/* <Route path="/movies/:id" render={({props})=><MovieForm {...props }></MovieForm>}></Route> */}
                 {/* <Route path="/movies/:id" component={MovieForm}></Route> */}
                 {/* develop protected routes to protect access by guest user */}
-                <ProtectedRoutes path ="/movies/:id" component ={MovieForm} render="/" />
+                <ProtectedRoutes path ="/movies/:id" component ={MovieForm} render="/login" />
                 <Route path="/login" component={LoginForm}></Route>
                 <Route path="/customers" component={Customers}></Route>
                 <Route path="/rentails" component={Rentails}></Route>
