@@ -13,13 +13,13 @@ import RegisterForm from './component/registerForm';
 import jwtDecode from 'jwt-decode'
 import UserAccount from './component/userAccount';
 import Logout from './component/logout';
-import { getCurrentUser } from './services/authService';
+import auth from './services/authService';
 
 
 function App() {
 const [user, setUser] = useState(null)
 useEffect(() => {
-   setUser(getCurrentUser())  
+   setUser(auth.getCurrentUser())  
 }, [])
 
     return(

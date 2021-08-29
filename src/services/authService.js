@@ -4,12 +4,12 @@ import jwtDecode from 'jwt-decode'
 
 const url = `${config.backendServerURL}/login`
 
-export async function login(email, password) {
+async function login(email, password) {
     return await http.post(url, { email, password })
 }
 
 //decode token 
-export function getCurrentUser() {
+function getCurrentUser() {
     try {
         const token = localStorage.getItem('token')
         const user = jwtDecode(token)
@@ -18,12 +18,26 @@ export function getCurrentUser() {
         return null
     }
 }
-export function saveToken(token) {
+
+function getJwt() {
+    return localStorage.getItem('token')
+}
+
+function saveToken(token) {
     localStorage.setItem('token', token)
     window.location = "/" //mount all components again with redirect to home page
 }
 
-export function logout() {
+function logout() {
     localStorage.removeItem('token')
     window.location = "/" //redirect to home page
 }
+
+const auth = {
+    logout,
+    login,
+    getJwt,
+    saveToken,
+    getCurrentUser
+}
+export default auth

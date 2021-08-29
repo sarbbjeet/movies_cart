@@ -1,9 +1,9 @@
 import {useEffect} from 'react'
-import { logout } from '../services/authService'
+import auth from '../services/authService'
 
 export default function Logout() {
     useEffect(() => {
-       logout() //call to logout method
+       auth.logout() //call to logout method
     }, [])
     return (
         null

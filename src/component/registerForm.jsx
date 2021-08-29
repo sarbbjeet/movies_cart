@@ -3,7 +3,7 @@ import React from 'react'
 import Form from './common/form'
 import {register} from '../services/userService'
 import { toast } from "react-toastify";
-import { saveToken } from '../services/authService';
+import auth from '../services/authService';
 
 export default class RegisterForm extends Form {
     state={
@@ -25,7 +25,7 @@ export default class RegisterForm extends Form {
       try{
           const {headers} = await register(this.state.data)
           //save token to chrome local database
-           saveToken(headers['x-auth-token']) //save token to chrome database
+           auth.saveToken(headers['x-auth-token']) //save token to chrome database
          
           toast.info('successfully account is created')
         //   this.props.history.push('/') //move to home page
