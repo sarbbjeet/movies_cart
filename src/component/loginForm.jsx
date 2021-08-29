@@ -1,5 +1,5 @@
 import Joi from 'joi-browser'
-import { login } from '../services/authService.js'
+import { login, saveToken } from '../services/authService.js'
 import Form from './common/form.jsx'
 
 
@@ -23,8 +23,7 @@ schema = {
         try{
             const {data,headers}= await login(this.state.data.username,
                 this.state.data.password)
-            localStorage.setItem('token', headers['x-auth-token'])
-            window.location='/'  //mount all components again
+            saveToken(headers['x-auth-token'])
             //this.props.history.push('/')  //home page
             
 

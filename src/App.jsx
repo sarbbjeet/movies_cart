@@ -13,24 +13,17 @@ import RegisterForm from './component/registerForm';
 import jwtDecode from 'jwt-decode'
 import UserAccount from './component/userAccount';
 import Logout from './component/logout';
+import { getCurrentUser } from './services/authService';
 
 
 function App() {
 const [user, setUser] = useState(null)
 useEffect(() => {
-    try{
-        const token = localStorage.getItem('token')
-        const user = jwtDecode(token)
-        setUser(user)
-    }
-    catch(ex){ }
+   setUser(getCurrentUser())  
 }, [])
 
     return(
         <React.Fragment>
-            {
-
-            }
             <NavBar user={user} />
             <main className="container mt-5">
                 {/* toast component */}

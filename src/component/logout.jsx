@@ -1,10 +1,9 @@
 import {useEffect} from 'react'
+import { logout } from '../services/authService'
 
 export default function Logout() {
     useEffect(() => {
-        localStorage.removeItem('token')
-        window.location= "/"
-      
+       logout() //call to logout method
     }, [])
     return (
         null
