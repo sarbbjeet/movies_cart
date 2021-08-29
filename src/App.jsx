@@ -14,6 +14,7 @@ import jwtDecode from 'jwt-decode'
 import UserAccount from './component/userAccount';
 import Logout from './component/logout';
 import auth from './services/authService';
+import ProtectedRoutes from './component/common/protectedRoutes';
 
 
 function App() {
@@ -29,13 +30,12 @@ useEffect(() => {
                 {/* toast component */}
                 <ToastContainer />   
             <Switch>
-                <Route exact path = "/movies" render = {({props})=>
-                <Movies {...props} user= {auth.getCurrentUser()}></Movies>}></Route> 
+                <Route exact path = "/movies" render = {props=>
+                <Movies {...props} user={user}/>}></Route> 
                 {/* <Route path="/movies/:id" render={({props})=><MovieForm {...props }></MovieForm>}></Route> */}
                 {/* <Route path="/movies/:id" component={MovieForm}></Route> */}
-                <Route path="/movies/:id" 
-                render={props => auth.getCurrentUser() ? <MovieForm {...props}></MovieForm>
-                                                       : <Redirect to="/"></Redirect>}></Route>
+                {/* develop protected routes to protect access by guest user */}
+                <ProtectedRoutes path ="/movies/:id" component ={MovieForm} render="/" />
                 <Route path="/login" component={LoginForm}></Route>
                 <Route path="/customers" component={Customers}></Route>
                 <Route path="/rentails" component={Rentails}></Route>
@@ -43,7 +43,8 @@ useEffect(() => {
                 <Route path = "/account" component={UserAccount}></Route>
                 <Route path = "/logout" component={Logout}></Route>
                 <Route path = "/notfound" component={NotFound}></Route> 
-                <Route exact  path = "/" component = {Movies}></Route> 
+                <Route exact  path = "/" render = {props=>
+                <Movies {...props} user={user}/>}></Route> 
                 <Redirect to ='/notfound'></Redirect> 
             </Switch>
             </main>

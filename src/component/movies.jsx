@@ -99,9 +99,10 @@ async componentDidMount(){
         
               {/* movie table */}
               <div className="col">
-                { this.props.user && 
+                {
+                  this.props.user &&
                 <Link className="btn btn-primary m-4" to="/movies/new">Add Movie</Link> 
-                }
+               }
               <h3>{this.displayMoviesCount(movies)}</h3>
 
               <div className="mb-3"> 
