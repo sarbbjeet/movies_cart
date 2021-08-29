@@ -1,4 +1,5 @@
 import Joi from 'joi-browser'
+import { login } from '../services/authService.js'
 import Form from './common/form.jsx'
 
 
@@ -17,10 +18,24 @@ schema = {
     username: Joi.string().required().email().label("Username"),
     password: Joi.string().required().label("Password")
 }
+    doSubmit = async()=>{
+        //server code
+        try{
+            const {data,headers}= await login(this.state.data.username,
+                this.state.data.password)
+            localStorage.setItem('token', headers['x-auth-token'])
+            window.location='/'  //mount all components again
+            //this.props.history.push('/')  //home page
+            
 
-    doSubmit(){
-        //server code 
-        console.log("data=",this.state.data) 
+        } 
+        catch(ex){
+            if(ex.response && ex.response.status===400){
+                const errors = {...this.state.errors}
+                errors.username = ex.response.data.message
+                this.setState({errors})
+            }
+        }
     }
     render(){
     return (

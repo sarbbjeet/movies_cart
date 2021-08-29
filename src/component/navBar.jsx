@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-export default function NavBar() {
+export default function NavBar(props) {
     return (
         <div>
             <nav style={{margin:'5px'}} className="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,7 +22,21 @@ export default function NavBar() {
           <NavLink className="nav-link" to="/rentails">Rentails</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link " to="/login" >Login</NavLink>
+           {!props.user && <NavLink className="nav-link " to="/login" >Login</NavLink>}
+        </li>
+        <li className="nav-item">
+          {!props.user &&
+          <NavLink className="nav-link " to="/register" >Register</NavLink>
+          }
+        </li>
+        <li className="nav-item">
+        {/* to={`/account?user=${props.user.name}` */}
+           {props.user && <NavLink className="nav-link " to='/account'>{props.user.name}</NavLink>}
+        </li>
+        <li className="nav-item">
+          {props.user &&
+          <NavLink className="nav-link " to="/logout" >Logout</NavLink>
+          }
         </li>
       </ul>
     </div>
