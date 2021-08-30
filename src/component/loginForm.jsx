@@ -42,7 +42,7 @@ schema = {
     return (
         <div>
             {
-                // protected login route when user is already login
+            // protected login route when user is already login
             auth.getCurrentUser() && <Redirect to="/" />           
             }
             <h3>Login Form </h3>
