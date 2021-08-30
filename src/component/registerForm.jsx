@@ -28,6 +28,7 @@ export default class RegisterForm extends Form {
            auth.saveToken(headers['x-auth-token']) //save token to chrome database
          
           toast.info('successfully account is created')
+          window.location="/" //move to root
         //   this.props.history.push('/') //move to home page
            
       }
