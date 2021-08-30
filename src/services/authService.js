@@ -2,7 +2,7 @@ import config from '../config.json'
 import http from '../services/httpServices'
 import jwtDecode from 'jwt-decode'
 
-const url = `${config.backendServerURL}/login`
+const url = `/login`
 
 async function login(email, password) {
     return await http.post(url, { email, password })

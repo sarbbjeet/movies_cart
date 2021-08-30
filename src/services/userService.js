@@ -1,7 +1,7 @@
 import config from '../config.json'
 import http from '../services/httpServices'
 
-const url = `${config.backendServerURL}/users`
+const url = `/users`
 
 function mapToViewModel(data) {
     return {

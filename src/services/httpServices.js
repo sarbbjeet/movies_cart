@@ -4,12 +4,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 // import auth from "./authService";   //bidirectional mistake 
 
+//base base url of backend api server 
+axios.defaults.baseURL = process.env.REACT_APP_API_URL
+    //////////////////////////////////////
 axios.interceptors.response.use(null, error => {
     const expectedError = error.response && error.response.status >= 400 &&
         error.response.status <= 500
     if (!expectedError)
     // toast.error(`expected error: ${error.message}`)
-        toast.error(`expected error: ${error.response.data.message}`)
+        toast.error(`expected error: ${error.message}`)
         //  alert(error) //unexpected error such as network error or bugs 
     else
         toast.error(`unexpected error: ${error.response.data.message}`) //custom message
