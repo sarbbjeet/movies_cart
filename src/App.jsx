@@ -15,6 +15,9 @@ import UserAccount from "./component/userAccount";
 import Logout from "./component/logout";
 import auth from "./services/authService";
 import ProtectedRoutes from "./component/common/protectedRoutes";
+import FindAccount from "./component/common/findAccount";
+import ResetPassword from "./component/common/resetPassword";
+import SecurityCode from "./component/common/securityCode";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -23,7 +26,7 @@ function App() {
   }, []);
 
   return (
-    <React.Fragment>
+    <div style={{ backgroundColor: "rgba(220,220,200,0.2)", height: "100vh" }}>
       <NavBar user={user} />
       <main className="container mt-5">
         {/* toast component */}
@@ -46,6 +49,9 @@ function App() {
           <Route path="/customers" component={Customers}></Route>
           <Route path="/rentails" component={Rentails}></Route>
           <Route path="/register" component={RegisterForm}></Route>
+          <Route path="/find-account" component={FindAccount}></Route>
+          <Route path="/reset-password" component={ResetPassword}></Route>
+          <Route path="/security-code" component={SecurityCode}></Route>
           <ProtectedRoutes
             path="/account"
             component={UserAccount}
@@ -61,7 +67,7 @@ function App() {
           <Redirect to="/notfound"></Redirect>
         </Switch>
       </main>
-    </React.Fragment>
+    </div>
   );
 }
 
