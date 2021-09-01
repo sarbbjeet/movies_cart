@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 
 import { forgottenPassword as fp } from "../../services/forgottenPasswordService";
 
@@ -12,12 +11,12 @@ export default function FindAccount(props) {
       return setError("Fill in at least one field to search for your account");
     const { data: response } = await fp.findAccount(_email);
     if (!response.success) return setError(response.message);
-    const { name, email, _id } = response.message;
+    const { name, email } = response.message;
     //server code
     // console.log("history1= ", props.location);
     props.history.push({
       pathname: "/reset-password",
-      state: { name, email, _id },
+      state: { name, email },
     });
     setEmail("");
     setError("");

@@ -1,11 +1,20 @@
 import React from "react";
+import { forgottenPassword as fp } from "../../services/forgottenPasswordService";
 
 export default function ResetPassword(props) {
   //get states date from previous routes using history props
-  const { name, email, _id } = props.history.location.state;
+  const { name, email } = props.history.location.state;
+
+  const submitSecretCode = async () => {
+    const { data: response } = await fp.resetPassword(email);
+    if (!response.success) return console.log(response.message);
+    return props.history.push({
+      pathname: "/security-code",
+      state: { email },
+    });
+  };
   return (
     <div className="p-2 formContainer">
-      {console.log("my history=", props.history)}
       <div>
         <h3>Reset Password</h3>
         <hr />
@@ -20,7 +29,9 @@ export default function ResetPassword(props) {
           >
             Not you?
           </button>
-          <button className="btn btn-primary">Continue</button>
+          <button className="btn btn-primary" onClick={submitSecretCode}>
+            Continue
+          </button>
         </div>
       </div>
     </div>

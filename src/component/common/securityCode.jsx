@@ -1,13 +1,26 @@
-import React from "react";
+import { forgottenPassword as fp } from "../../services/forgottenPasswordService";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 export default function SecurityCode(props) {
+  const [code, setCode] = useState("");
+  const [errors, setErrors] = useState("");
+  const { email } = props.history.location.state;
+
+  const verifySecretCode = async () => {
+    const { data: response } = await fp.verifyCode({ email, code });
+    // console.log("response=", response);
+    if (!response.success) return setErrors(response.message);
+    //server code
+    setCode("");
+    setErrors("");
+  };
   return (
     <div className="formContainer">
       <div>
         <h3>Enter security code</h3>
         <hr />
-        {false && (
+        {errors && (
           <div
             className="p-1"
             style={{
@@ -26,7 +39,6 @@ export default function SecurityCode(props) {
           Please check your emails for a message with your code. Your code is 6
           numbers long.
         </h6>
-
         <div style={{ width: "90%", display: "flex" }}>
           <input
             style={{ width: "40%" }}
@@ -35,9 +47,11 @@ export default function SecurityCode(props) {
             name="code"
             id="code"
             placeholder="Enter code"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
           />
           <p>
-            we sent your code to: <br /> sarbjeets18@gmail.com
+            we sent your code to: <br /> {email}
           </p>
         </div>
 
@@ -57,7 +71,9 @@ export default function SecurityCode(props) {
             >
               Cancel
             </button>
-            <button className="btn btn-primary">Continue</button>
+            <button onClick={verifySecretCode} className="btn btn-primary">
+              Continue
+            </button>
           </div>
         </div>
       </div>
