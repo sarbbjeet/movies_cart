@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { forgottenPassword as fp } from "../../services/forgottenPasswordService";
+import { forgottenPassword as fp } from "../../../services/forgottenPasswordService";
 
 export default function FindAccount(props) {
   const [_email, setEmail] = useState("");

@@ -10,14 +10,15 @@ import LoginForm from "./component/loginForm";
 import MovieForm from "./component/movieForm";
 import { ToastContainer } from "react-toastify"; //show toast here
 import RegisterForm from "./component/registerForm";
-import jwtDecode from "jwt-decode";
 import UserAccount from "./component/userAccount";
 import Logout from "./component/logout";
 import auth from "./services/authService";
 import ProtectedRoutes from "./component/common/protectedRoutes";
-import FindAccount from "./component/common/findAccount";
-import ResetPassword from "./component/common/resetPassword";
-import SecurityCode from "./component/common/securityCode";
+import FindAccount from "./component/common/forgotten_password/findAccount";
+import ResetPassword from "./component/common/forgotten_password/resetPassword";
+import SecurityCode from "./component/common/forgotten_password/securityCode";
+import ChoosePassword from "./component/common/forgotten_password/choosePassword";
+import PasswordChanged from "./component/common/forgotten_password/passwordChanged";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -52,6 +53,8 @@ function App() {
           <Route path="/find-account" component={FindAccount}></Route>
           <Route path="/reset-password" component={ResetPassword}></Route>
           <Route path="/security-code" component={SecurityCode}></Route>
+          <Route path="/choose-password" component={ChoosePassword}></Route>
+          <Route path="/password-changed" component={PasswordChanged}></Route>
           <ProtectedRoutes
             path="/account"
             component={UserAccount}

@@ -1,5 +1,5 @@
 import React from "react";
-import { forgottenPassword as fp } from "../../services/forgottenPasswordService";
+import { forgottenPassword as fp } from "../../../services/forgottenPasswordService";
 
 export default function ResetPassword(props) {
   //get states date from previous routes using history props
