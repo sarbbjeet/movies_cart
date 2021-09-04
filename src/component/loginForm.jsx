@@ -1,5 +1,5 @@
 import Joi from "joi-browser";
-import { Link, NavLink, Redirect } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import auth from "../services/authService.js";
 import Form from "./common/form.jsx";
 import "./LoginForm.css";
@@ -23,7 +23,7 @@ export default class LoginForm extends Form {
     //server code
     try {
       const { state } = this.props.location; //get previous location or pathname
-      const { data, headers } = await auth.login(
+      const { headers } = await auth.login(
         this.state.data.username,
         this.state.data.password
       );

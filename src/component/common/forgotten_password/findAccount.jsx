@@ -43,6 +43,7 @@ export default function FindAccount(props) {
         <p>Please enter your email address to search for your account.</p>
         <input
           className="form-control"
+          autoComplete="off"
           type="email"
           name="email"
           id="email"
@@ -53,6 +54,7 @@ export default function FindAccount(props) {
         <hr />
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <button
+            onClick={() => props.history.push("/login")}
             style={{ backgroundColor: "rgba(200,230,230,0.5)" }}
             className="btn mr-3"
           >

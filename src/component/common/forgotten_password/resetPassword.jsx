@@ -24,6 +24,7 @@ export default function ResetPassword(props) {
         <hr />
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <button
+            onClick={() => props.history.goBack()}
             style={{ backgroundColor: "rgba(200,230,230,0.5)" }}
             className="btn mr-3"
           >

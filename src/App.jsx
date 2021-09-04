@@ -19,6 +19,7 @@ import ResetPassword from "./component/common/forgotten_password/resetPassword";
 import SecurityCode from "./component/common/forgotten_password/securityCode";
 import ChoosePassword from "./component/common/forgotten_password/choosePassword";
 import PasswordChanged from "./component/common/forgotten_password/passwordChanged";
+import StateProtectedRoutes from "./component/common/stateProtectedRoutes";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -51,10 +52,28 @@ function App() {
           <Route path="/rentails" component={Rentails}></Route>
           <Route path="/register" component={RegisterForm}></Route>
           <Route path="/find-account" component={FindAccount}></Route>
-          <Route path="/reset-password" component={ResetPassword}></Route>
-          <Route path="/security-code" component={SecurityCode}></Route>
-          <Route path="/choose-password" component={ChoosePassword}></Route>
-          <Route path="/password-changed" component={PasswordChanged}></Route>
+          <StateProtectedRoutes
+            path="/reset-password"
+            render="/login"
+            component={ResetPassword}
+          />
+          <StateProtectedRoutes
+            path="/security-code"
+            render="/login"
+            component={SecurityCode}
+          />
+          <StateProtectedRoutes
+            path="/choose-password"
+            render="/login"
+            component={ChoosePassword}
+          />
+
+          <StateProtectedRoutes
+            path="/password-changed"
+            render="/login"
+            component={PasswordChanged}
+          />
+
           <ProtectedRoutes
             path="/account"
             component={UserAccount}

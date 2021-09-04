@@ -1,11 +1,18 @@
 import { forgottenPassword as fp } from "../../../services/forgottenPasswordService";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SecurityCode(props) {
   const [code, setCode] = useState("");
   const [errors, setErrors] = useState("");
   const { email } = props.history.location.state;
+
+  const resendOTP = async () => {
+    const { data: response } = await fp.resetPassword(email);
+    if (!response.success) return toast.error("error to send otp");
+    return toast.info(`Resent OTP to: ${email}`);
+  };
 
   const verifySecretCode = async () => {
     const { data: response } = await fp.verifyCode({ email, code });
@@ -48,6 +55,7 @@ export default function SecurityCode(props) {
             style={{ width: "40%" }}
             className="mr-2 form-control"
             type="text"
+            autoComplete="off"
             name="code"
             id="code"
             placeholder="Enter code"
@@ -67,9 +75,15 @@ export default function SecurityCode(props) {
             alignItems: "center",
           }}
         >
-          <NavLink to="">Didn't get a code?</NavLink>
+          <NavLink
+            to={{ pathname: props.history.location.pathname, state: { email } }}
+            onClick={resendOTP}
+          >
+            Didn't get a code?
+          </NavLink>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <button
+              onClick={() => props.history.push("/find-account")}
               style={{ backgroundColor: "rgba(200,230,230,0.5)" }}
               className="btn mr-3"
             >

@@ -67,6 +67,7 @@ export default function ChoosePassword(props) {
         <hr />
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <button
+            onClick={() => (window.location = "/login")}
             style={{ backgroundColor: "rgba(200,230,230,0.5)" }}
             className="btn mr-3"
           >
