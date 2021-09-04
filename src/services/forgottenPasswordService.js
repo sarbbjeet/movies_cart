@@ -11,6 +11,15 @@ const findAccount = async(email) => {
     }
 };
 
+const updatePassword = async({ email, password }) => {
+    const url = baseUrl + "/update-password";
+    try {
+        return await http.post(url, { email, password });
+    } catch (ex) {
+        return ex.response;
+    }
+};
+
 const verifyCode = async({ email, code }) => {
     const url = baseUrl + "/verify-secret-code";
     try {
@@ -33,6 +42,7 @@ const forgottenPassword = {
     findAccount,
     resetPassword,
     verifyCode,
+    updatePassword,
 };
 
 export { forgottenPassword };

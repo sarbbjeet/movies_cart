@@ -11,6 +11,10 @@ export default function SecurityCode(props) {
     const { data: response } = await fp.verifyCode({ email, code });
     // console.log("response=", response);
     if (!response.success) return setErrors(response.message);
+    //entered security code is correct
+    //move to choose-password route with props email
+    props.history.push({ pathname: "/choose-password", state: { email } });
+
     //server code
     setCode("");
     setErrors("");
