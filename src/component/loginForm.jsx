@@ -51,7 +51,7 @@ export default class LoginForm extends Form {
           <form onSubmit={this.handleSubmit}>
             {/* {this.renderInput('name', 'Name') } */}
             {/* name, label arguments of renderInput */}
-            {this.renderInput("username", "Username")}
+            {this.renderInput("username", "Username", "email")}
             {/* name, label,type arguments of renderInput */}
             {this.renderInput("password", "Password", "password")}
             <div>

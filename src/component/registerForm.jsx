@@ -49,7 +49,7 @@ export default class RegisterForm extends Form {
           <hr />
           <form onSubmit={this.handleSubmit}>
             {this.renderInput("name", "Name")}
-            {this.renderInput("username", "Username")}
+            {this.renderInput("username", "Username", "email")}
             {this.renderInput("password", "Password", "password")}
             {this.renderButton("signup")}
           </form>
