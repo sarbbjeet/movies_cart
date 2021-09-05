@@ -14,6 +14,22 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 this web app is deployed on heroku https://movies-app11.herokuapp.com/
 
 
+# ScreenShoots
+### home page
+
+![imgonline-com-ua-resize-TnQSfBXLjsWy](https://user-images.githubusercontent.com/9445093/132126302-59e0c691-2d38-46d9-975c-f56541fddece.jpg)
+
+### login
+
+![imgonline-com-ua-resize-B1AU0bAfQy6](https://user-images.githubusercontent.com/9445093/132126262-e8576142-4ba7-45ed-8d34-acc01543ae31.jpg)
+
+### forgotten password
+
+![imgonline-com-ua-resize-vJkY19AlWOUEV](https://user-images.githubusercontent.com/9445093/132126345-ba65ff49-247d-4235-9f61-9fd5d05b18c6.jpg)
+
+
+
+
 
 
 # Set-Up
