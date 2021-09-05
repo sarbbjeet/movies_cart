@@ -73,7 +73,7 @@ export default function ChoosePassword(props) {
           <button
             onClick={() => (window.location = "/login")}
             style={{ backgroundColor: "rgba(200,230,230,0.5)" }}
-            className="btn mr-3"
+            className="btn me-3"
           >
             Skip
           </button>

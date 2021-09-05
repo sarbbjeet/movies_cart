@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 
 import { routes, httpRequest } from "../../../services/forgottenPassword";
 
@@ -60,7 +61,7 @@ export default function FindAccount(props) {
           <button
             onClick={() => props.history.push("/login")}
             style={{ backgroundColor: "rgba(200,230,230,0.5)" }}
-            className="btn mr-3"
+            className="btn me-3"
           >
             Cancel
           </button>

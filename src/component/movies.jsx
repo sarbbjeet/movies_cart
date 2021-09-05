@@ -6,6 +6,7 @@ import Pagination from "./common/pagination";
 import MoviesTable from "./moviesTable";
 import _ from "lodash";
 import { Link } from "react-router-dom";
+import { Col, Row } from "react-bootstrap";
 
 export default class Movies extends Component {
   state = {
@@ -100,15 +101,16 @@ export default class Movies extends Component {
 
     return (
       <>
-        <div className="row">
-          <ListGroup
-            className="col-2"
-            selectedGenre={selectedGenre}
-            handleGenreSelect={this.handleGenreSelect}
-          />
+        <Row>
+          <Col className="col-2">
+            <ListGroup
+              selectedGenre={selectedGenre}
+              handleGenreSelect={this.handleGenreSelect}
+            />
+          </Col>
 
           {/* movie table */}
-          <div className="col">
+          <Col>
             {this.props.user && this.props.user.admin && (
               <Link className="btn btn-primary m-4" to="/movies/new">
                 Add Movie
@@ -139,8 +141,8 @@ export default class Movies extends Component {
               selectedPage={selectedPage}
               handlePageChange={this.handlePageChange}
             />
-          </div>
-        </div>
+          </Col>
+        </Row>
       </>
     );
   }

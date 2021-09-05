@@ -91,7 +91,7 @@ export default function SecurityCode(props) {
             <button
               onClick={() => props.history.push("/find-account")}
               style={{ backgroundColor: "rgba(200,230,230,0.5)" }}
-              className="btn mr-3"
+              className="btn me-3"
             >
               Cancel
             </button>
