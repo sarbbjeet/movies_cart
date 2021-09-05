@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 
-import { forgottenPassword as fp } from "../../../services/forgottenPasswordService";
+import { routes, httpRequest } from "../../../services/forgottenPassword";
 
 export default function FindAccount(props) {
   const [_email, setEmail] = useState("");
   const [error, setError] = useState("");
 
   const submitSearch = async () => {
+    const route = routes.findAcount;
     if (!_email)
       return setError("Fill in at least one field to search for your account");
-    const { data: response } = await fp.findAccount(_email);
+    const { data: response } = await httpRequest({
+      route,
+      data: { email: _email },
+    });
     if (!response.success) return setError(response.message);
     const { name, email } = response.message;
     //server code

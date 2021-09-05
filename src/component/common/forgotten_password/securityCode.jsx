@@ -1,4 +1,4 @@
-import { forgottenPassword as fp } from "../../../services/forgottenPasswordService";
+import { routes, httpRequest } from "../../../services/forgottenPassword";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -9,13 +9,19 @@ export default function SecurityCode(props) {
   const { email } = props.history.location.state;
 
   const resendOTP = async () => {
-    const { data: response } = await fp.resetPassword(email);
+    const route = routes.resetPassword;
+    const { data: response } = await httpRequest({ route, data: { email } });
     if (!response.success) return toast.error("error to send otp");
     return toast.info(`Resent OTP to: ${email}`);
   };
 
   const verifySecretCode = async () => {
-    const { data: response } = await fp.verifyCode({ email, code });
+    const route = routes.verifyCode;
+    const { data: response } = await httpRequest({
+      route,
+      data: { email, code },
+    });
+
     // console.log("response=", response);
     if (!response.success) return setErrors(response.message);
     //entered security code is correct

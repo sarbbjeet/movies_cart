@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Joi, { validate } from "joi-browser";
-import { forgottenPassword as fp } from "../../../services/forgottenPasswordService";
+import { routes, httpRequest } from "../../../services/forgottenPassword";
 
 export default function ChoosePassword(props) {
   const { email } = props.history.location.state;
@@ -8,9 +8,13 @@ export default function ChoosePassword(props) {
   const [errors, setErrors] = useState("");
 
   const submitNewPassword = async () => {
-    const { data: response } = await fp.updatePassword({
-      password: pass,
-      email,
+    const route = routes.updatePassword;
+    const { data: response } = await httpRequest({
+      route,
+      data: {
+        password: pass,
+        email,
+      },
     });
     if (!response.success) return;
     //successfully updated password

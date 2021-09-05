@@ -1,12 +1,13 @@
 import React from "react";
-import { forgottenPassword as fp } from "../../../services/forgottenPasswordService";
+import { routes, httpRequest } from "../../../services/forgottenPassword";
 
 export default function ResetPassword(props) {
   //get states date from previous routes using history props
   const { name, email } = props.history.location.state;
 
   const submitSecretCode = async () => {
-    const { data: response } = await fp.resetPassword(email);
+    const route = routes.resetPassword;
+    const { data: response } = await httpRequest({ route, data: { email } });
     if (!response.success) return console.log(response.message);
     return props.history.push({
       pathname: "/security-code",
