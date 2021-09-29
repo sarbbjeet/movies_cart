@@ -6,7 +6,6 @@ import Pagination from "./common/pagination";
 import MoviesTable from "./moviesTable";
 import _ from "lodash";
 import { Link } from "react-router-dom";
-import { Col, Row } from "react-bootstrap";
 
 export default class Movies extends Component {
   state = {
@@ -100,50 +99,48 @@ export default class Movies extends Component {
     const paginateItems = paginate(sorted, pageSize, selectedPage);
 
     return (
-      <>
-        <Row>
-          <Col className="col-2">
-            <ListGroup
-              selectedGenre={selectedGenre}
-              handleGenreSelect={this.handleGenreSelect}
-            />
-          </Col>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div style={{ margin: "0.5rem", width: "15rem" }}>
+          <ListGroup
+            selectedGenre={selectedGenre}
+            handleGenreSelect={this.handleGenreSelect}
+          />
+        </div>
 
-          {/* movie table */}
-          <Col>
-            {this.props.user && this.props.user.admin && (
-              <Link className="btn btn-primary m-4" to="/movies/new">
-                Add Movie
-              </Link>
-            )}
-            <h3>{this.displayMoviesCount(movies)}</h3>
+        {/* movie table */}
+        <div style={{ margin: "0.5rem", width: "26rem" }}>
+          {this.props.user && this.props.user.admin && (
+            <Link className="btn btn-primary m-4" to="/movies/new">
+              Add Movie
+            </Link>
+          )}
+          <h3>{this.displayMoviesCount(movies)}</h3>
 
-            <div className="mb-3">
-              <input
-                name="search"
-                id="search"
-                className="form-control"
-                autoComplete="off"
-                placeholder="Search.."
-                value={this.state.searchtext}
-                onChange={this.searchOnChange}
-              />
-            </div>
-            <MoviesTable
-              deleteMovie={this.deleteMovie}
-              movies={paginateItems}
-              onSort={this.handleSort}
-              sortedColumn={sortedColumn}
+          <div className="mb-3">
+            <input
+              name="search"
+              id="search"
+              className="form-control"
+              autoComplete="off"
+              placeholder="Search.."
+              value={this.state.searchtext}
+              onChange={this.searchOnChange}
             />
-            {/* pagination under movie table same column  */}
-            <Pagination
-              numberOfPage={numberOfPage}
-              selectedPage={selectedPage}
-              handlePageChange={this.handlePageChange}
-            />
-          </Col>
-        </Row>
-      </>
+          </div>
+          <MoviesTable
+            deleteMovie={this.deleteMovie}
+            movies={paginateItems}
+            onSort={this.handleSort}
+            sortedColumn={sortedColumn}
+          />
+          {/* pagination under movie table same column  */}
+          <Pagination
+            numberOfPage={numberOfPage}
+            selectedPage={selectedPage}
+            handlePageChange={this.handlePageChange}
+          />
+        </div>
+      </div>
     );
   }
 }
